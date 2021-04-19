@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "716701378838",
+    "project_id": "flash-a5e93",
+    "storage_bucket": "flash-a5e93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716701378838:android:5d3dd080ae2312b1960837",
+        "android_client_info": {
+          "package_name": "com.codeanything.flash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716701378838-ifbcpquln14araq1c47u2osbocjl17nh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codeanything.flash",
+            "certificate_hash": "66e40c69d81ff48f9a6d6d1489dcb0438494a109"
+          }
+        },
+        {
+          "client_id": "716701378838-ie3m024e5mpcs3gmmuv11po3nvdt5cem.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9QoYmGIrFSLujqJVJAVcI8YltTCbXeLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716701378838-ie3m024e5mpcs3gmmuv11po3nvdt5cem.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "716701378838-be1saomul4a335c1hieiagnmjtu27uc7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.codeanything.flash"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

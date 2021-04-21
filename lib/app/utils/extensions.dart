@@ -1,16 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash/app/models/user_model.dart';
 
-extension UserExtension on firebase_auth.User {
-  UserModel toUser() {
+extension on User {
+  UserModel get toUser {
     return UserModel(
-      id: this.uid,
-      name: this.displayName,
-      email: this.email,
-      password: null,
-      photoUrl: this.photoURL,
-      status: 'unknown',
-      hasStories: false,
-    );
+        id: uid,
+        email: email,
+        password: null,
+        name: displayName,
+        photoUrl: photoURL);
   }
 }

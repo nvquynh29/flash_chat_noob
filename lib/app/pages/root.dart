@@ -12,6 +12,10 @@ class Root extends StatelessWidget {
   static final routeName = '/';
   @override
   Widget build(BuildContext context) {
+    // var _firebaseUser = Get.find<AuthController>().user;
+    // var _userModel = Get.find<UserController>().user;
+    // return Obx(() =>
+    //     (_firebaseUser != null && _userModel != UserModel.empty) ? HomePage() : LoginPage());
     return Obx(() =>
         (Get.find<AuthController>().user != null) ? HomePage() : LoginPage());
   }

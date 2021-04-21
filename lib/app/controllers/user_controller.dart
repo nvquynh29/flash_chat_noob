@@ -5,14 +5,13 @@ import 'package:get/get.dart';
 
 // UserController : controll user model
 class UserController extends GetxController {
-  var _userModel = UserModel().obs;
+  var _userModel =  FirebaseAuth.instance.currentUser.toUser.obs;
   // TODO: Local Storage fast update
-  @override
-  onInit() async {
+  Future refreshUser() async {
     var _firebaseUser = FirebaseAuth.instance.currentUser;
     if (_firebaseUser != null) {
       var _user = await UserRepository().getUser(_firebaseUser.uid);
-      _userModel.value = _user;
+      this._userModel.value = _user;
     }
   }
 
@@ -21,5 +20,16 @@ class UserController extends GetxController {
 
   void clear() {
     // _userModel.value = UserModel.empty;
+  }
+}
+
+extension on User {
+  UserModel get toUser {
+    return UserModel(
+        id: uid,
+        email: email,
+        password: null,
+        name: displayName,
+        photoUrl: photoURL);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flash/app/pages/call/call_page.dart';
 import 'package:flash/app/pages/call/video_call.dart';
 import 'package:flash/app/pages/call/voice_call.dart';
 import 'package:flash/app/pages/chat/chat_page.dart';
@@ -20,4 +21,5 @@ final List<GetPage<dynamic>> routes = [
   GetPage(name: VoiceCall.routeName, page: () => VoiceCall()),
   GetPage(name: VideoCall.routeName, page: () => VideoCall()),
   GetPage(name: Loading.routeName, page: () => Loading()),
+  GetPage(name: CallPage.routeName, page: () => CallPage()),
 ];

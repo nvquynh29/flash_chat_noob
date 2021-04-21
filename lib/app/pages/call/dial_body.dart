@@ -1,16 +1,31 @@
-
+import 'package:agora_rtc_engine/rtc_engine.dart';
+import 'package:flash/app/controllers/channel_controller.dart';
 import 'package:flash/app/models/call.dart';
+import 'package:flash/app/pages/call/call_page.dart';
 import 'package:flash/app/pages/call/video_call.dart';
 import 'package:flash/app/widgets/cached_image.dart';
 import 'package:flash/repositories/call_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DialBody extends StatelessWidget {
+class DialBody extends StatefulWidget {
   final Call call;
-  final _callRepository = CallRepository();
 
   DialBody({@required this.call});
+
+  @override
+  _DialBodyState createState() => _DialBodyState();
+}
+
+class _DialBodyState extends State<DialBody> {
+  final _callRepository = CallRepository();
+
+  @override
+  void dispose() {
+    super.dispose();
+    this.deactivate();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +41,10 @@ class DialBody extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            Text('Image Here', style: TextStyle(fontSize: 30),),
+            Text(
+              'Image Here',
+              style: TextStyle(fontSize: 30),
+            ),
             // CachedImage(
             //   call.caller.photoUrl,
             //   isRound: true,
@@ -38,7 +56,7 @@ class DialBody extends StatelessWidget {
               height: 15,
             ),
             Text(
-              'Caller name',
+              widget.call.caller.name,
               // call.callerName,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -53,7 +71,7 @@ class DialBody extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () async {
-                    await _callRepository.endCall(call: call);
+                    await _callRepository.endCall(call: widget.call);
                   },
                   icon: Icon(Icons.call_end),
                   color: Colors.red,
@@ -62,8 +80,16 @@ class DialBody extends StatelessWidget {
                   width: 25,
                 ),
                 IconButton(
-                  onPressed: () {
-                    Get.toNamed(VideoCall.routeName, arguments: call);
+                  onPressed: () async {
+                    final channelController = ChannelController();
+                    await channelController.onJoin();
+                    Get.to(CallPage(
+                      channelName: widget.call.channelId,
+                      role: widget.call.type == 'voice'
+                          ? ClientRole.Audience
+                          : ClientRole.Broadcaster,
+                    ));
+                    // Get.toNamed(VideoCall.routeName, arguments: call);
                   },
                   icon: Icon(Icons.call),
                   color: Colors.green,

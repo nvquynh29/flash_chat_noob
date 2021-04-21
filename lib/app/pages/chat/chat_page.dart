@@ -1,16 +1,9 @@
-import 'dart:math';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flash/app/constants/colors.dart';
-import 'package:flash/app/models/call.dart';
 import 'package:flash/app/models/user_model.dart';
-import 'package:flash/app/pages/call/video_call.dart';
-import 'package:flash/app/pages/call/voice_call.dart';
 import 'package:flash/app/pages/chat/components/body.dart';
 import 'package:flash/app/utils/call_utils.dart';
 import 'package:flash/app/utils/media.dart';
-import 'package:flash/app/widgets/avatar.dart';
 import 'package:flash/repositories/call_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -82,19 +75,6 @@ class _ChatPageState extends State<ChatPage>
               to: widget.receiver,
               clientRole: ClientRole.Audience,
             );
-            // Call call = Call(
-            //   type: 'voice',
-            //   startTime: Timestamp.now(),
-            //   endTime: Timestamp.now(),
-            //   duration: 0,
-            //   caller: widget.sender,
-            //   receiver: widget.receiver,
-            //   channelId: Random().nextInt(1000).toString(),
-            // );
-            // bool callMade = await _callRepository.makeCall(call: call);
-            // if (callMade) {
-            //   Get.toNamed(VoiceCall.routeName, arguments: call);
-            // }
           },
           icon: Icon(Icons.local_phone),
         ),
@@ -105,17 +85,6 @@ class _ChatPageState extends State<ChatPage>
               to: widget.receiver,
               clientRole: ClientRole.Broadcaster,
             );
-            // Call call = Call(
-            //   type: 'video',
-            //   startTime: Timestamp.now(),
-            //   endTime: Timestamp.now(),
-            //   duration: 0,
-            //   caller: widget.sender,
-            //   receiver: widget.receiver,
-            //   channelId: Random().nextInt(1000).toString(),
-            // );
-            // await _callRepository.makeCall(call: call);
-            // Get.toNamed(VideoCall.routeName, arguments: call);
           },
           icon: Icon(Icons.videocam),
         ),

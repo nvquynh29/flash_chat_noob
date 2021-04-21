@@ -1,9 +1,5 @@
 import 'dart:convert';
 
-import 'package:meta/meta.dart';
-
-enum UserStatus { online, offline, unknown }
-
 class UserModel {
   String id;
   String name;
@@ -18,8 +14,8 @@ class UserModel {
     this.email,
     this.password,
     this.photoUrl,
-    this.status,
-    this.hasStories,
+    this.status = 'unknown',
+    this.hasStories = false,
   });
 
   static final empty = UserModel(

@@ -12,8 +12,7 @@ class Root extends StatelessWidget {
   static final routeName = '/';
   @override
   Widget build(BuildContext context) {
-    return Obx(() => (Get.find<AuthController>().user != null)
-        ? HomePage()
-        : LoginPage());
+    return Obx(() =>
+        (Get.find<AuthController>().user != null) ? HomePage() : LoginPage());
   }
 }

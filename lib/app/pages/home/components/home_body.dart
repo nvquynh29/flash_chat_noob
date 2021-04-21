@@ -97,19 +97,6 @@ class HomeBody extends StatelessWidget {
                       Get.toNamed(ChatPage.routeName, arguments: arguments);
                     },
                   );
-                  // return Container(
-                  //   child: ListTile(
-                  //     title: Text(
-                  //       contact.uid,
-                  //       style: TextStyle(fontSize: 20),
-                  //     ),
-                  // subtitle: LastMessageContainer(
-                  //   stream: _contactRepo.fetchLastMessage(
-                  //       senderId: currentUser.id,
-                  //       receiverId: contact.uid),
-                  // ),
-                  //   ),
-                  // );
                 },
               );
             }

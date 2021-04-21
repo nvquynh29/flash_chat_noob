@@ -1,4 +1,4 @@
-import 'package:flash/app/models/user_model.dart';
+import 'package:flash/app/models/call.dart';
 import 'package:flash/app/pages/call/widgets/circle_icon_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +6,10 @@ import 'package:get/get.dart';
 
 class VoiceCall extends StatelessWidget {
   static const routeName = '/voiceCall';
-  UserModel caller;
-  UserModel receiver;
+  Call call;
 
   VoiceCall() {
-    caller = Get.arguments['caller'];
-    receiver = Get.arguments['receiver'];
+    call = Get.arguments;
   }
 
   @override
@@ -29,12 +27,12 @@ class VoiceCall extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             Text(
-              receiver.name,
+              call.receiver.name,
               style:
                   Theme.of(context).textTheme.headline1?.copyWith(fontSize: 22),
             ),
             Text(
-              receiver.email,
+              call.receiver.email,
               style: Theme.of(context)
                   .textTheme
                   .caption

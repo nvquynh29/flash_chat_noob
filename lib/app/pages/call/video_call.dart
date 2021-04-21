@@ -1,16 +1,26 @@
+import 'package:flash/app/models/call.dart';
 import 'package:flash/app/pages/call/widgets/circle_icon_button.dart';
+import 'package:flash/repositories/call_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class VideoCall extends StatelessWidget {
   static final routeName = '/videoCall';
+  Call call;
+
+  VideoCall() {
+    call = Get.arguments;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Column(children: [
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         Expanded(
           child: Column(children: [
             Align(
@@ -42,7 +52,8 @@ class VideoCall extends StatelessWidget {
         CircleIconButton(
           icon: CupertinoIcons.phone_down,
           color: Colors.red,
-          onPressed: () {
+          onPressed: () async {
+            await CallRepository().endCall(call: call);
             Get.back();
           },
         ),

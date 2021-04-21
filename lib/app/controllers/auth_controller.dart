@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/models/user_model.dart';
+import 'package:flash/app/pages/home/home_page.dart';
 import 'package:flash/repositories/user_repository.dart';
 import 'package:get/get.dart';
 
@@ -52,6 +53,7 @@ class AuthController extends GetxController {
           email: email.trim(), password: password);
       _userController.user =
           await UserRepository().getUser(_authResult.user.uid);
+      Get.toNamed(HomePage.routeName);
     } catch (e) {
       Get.snackbar(
         "Error signing in",

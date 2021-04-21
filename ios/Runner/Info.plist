@@ -52,5 +52,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Select Yes to continue</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Select Yes to continue</string>
+	<key>NSCameraUsageDescription</key>
+	<string>MyApp needs access to your camera for call.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>MyApp needs access to your microphone for call.</string>
 </dict>
 </plist>

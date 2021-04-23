@@ -1,5 +1,6 @@
 import 'package:flash/app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flash/app/utils/media.dart';
 
 class Avatar extends StatelessWidget {
   final double radius;
@@ -13,13 +14,19 @@ class Avatar extends StatelessWidget {
       this.online = false,
       this.hasStories = false});
 
+  Media media;
+  double r;
+
   @override
   Widget build(BuildContext context) {
+    media = Media(context);
+    r = media.ratio;
+
     return hasStories
         ? Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: blue_story, width: 3),
+              border: Border.all(color: blue_story, width: r),
             ),
             child: Padding(
               padding: const EdgeInsets.all(2),
@@ -31,10 +38,11 @@ class Avatar extends StatelessWidget {
 
   Widget buildCircleAvatar() {
     return CircleAvatar(
+      backgroundColor: Colors.white,
       radius: radius,
       backgroundImage: imageURL != null ? NetworkImage(imageURL) : null,
       child: imageURL == null
-          ? Icon(Icons.person_outline, size: radius * 2)
+          ? Icon(Icons.person, color: Colors.blueGrey, size: radius * 1.5,)
           : null,
     );
   }
@@ -45,15 +53,15 @@ class Avatar extends StatelessWidget {
         buildCircleAvatar(),
         online
             ? Positioned(
-                bottom: 1,
-                right: 1,
+                bottom: 0,
+                right: 0,
                 child: Container(
-                  width: 20,
-                  height: 20,
+                  width: radius * 0.6,
+                  height: radius * 0.6,
                   decoration: BoxDecoration(
                       color: green,
                       shape: BoxShape.circle,
-                      border: Border.all(color: white, width: 3)),
+                      border: Border.all(color: white, width: r * 3)),
                 ),
               )
             : Container(),

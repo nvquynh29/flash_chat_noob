@@ -83,12 +83,26 @@ class _DialBodyState extends State<DialBody> {
                   onPressed: () async {
                     final channelController = ChannelController();
                     await channelController.onJoin();
-                    Get.to(CallPage(
-                      channelName: widget.call.channelId,
-                      role: widget.call.type == 'voice'
-                          ? ClientRole.Audience
-                          : ClientRole.Broadcaster,
-                    ));
+                    Get.offAll(
+                      CallPage(
+                        channelName: widget.call.channelId,
+                        role: widget.call.type == 'voice'
+                            ? ClientRole.Audience
+                            : ClientRole.Broadcaster,
+                        call: widget.call,
+                      ),
+                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (_) => CallPage(
+                    //       channelName: widget.call.channelId,
+                    //       role: widget.call.type == 'voice'
+                    //           ? ClientRole.Audience
+                    //           : ClientRole.Broadcaster,
+                    //     ),
+                    //   ),
+                    // );
                     // Get.toNamed(VideoCall.routeName, arguments: call);
                   },
                   icon: Icon(Icons.call),

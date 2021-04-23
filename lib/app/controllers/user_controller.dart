@@ -5,9 +5,10 @@ import 'package:get/get.dart';
 
 // UserController : controll user model
 class UserController extends GetxController {
-  var _userModel =  FirebaseAuth.instance.currentUser.toUser.obs;
-  // TODO: Local Storage fast update
-  Future refreshUser() async {
+  // var _userModel = FirebaseAuth.instance.currentUser.toUser.obs;
+  var _userModel = UserModel().obs;
+  @override
+  onInit() async {
     var _firebaseUser = FirebaseAuth.instance.currentUser;
     if (_firebaseUser != null) {
       var _user = await UserRepository().getUser(_firebaseUser.uid);
@@ -29,7 +30,7 @@ extension on User {
         id: uid,
         email: email,
         password: null,
-        name: displayName,
+        name: displayName ?? 'Nguyen Van Quynh',
         photoUrl: photoURL);
   }
 }

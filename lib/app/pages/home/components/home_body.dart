@@ -79,7 +79,7 @@ class HomeBody extends StatelessWidget {
                   Contact contact = Contact.fromMap(contactDocs[index].data());
                   return UserCard(
                     avatar: Avatar(
-                      radius: ratio * 25,
+                      radius: ratio * 30,
                       imageURL:
                           'https://images.unsplash.com/photo-1571741140674-8949ca7df2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
                       online: true,

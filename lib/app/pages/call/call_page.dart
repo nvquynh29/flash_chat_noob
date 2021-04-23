@@ -4,19 +4,24 @@ import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:flash/app/constants/agora_settings.dart';
+import 'package:flash/app/models/call.dart';
+import 'package:flash/app/pages/home/home_page.dart';
+import 'package:flash/app/pages/loading.dart';
+import 'package:flash/repositories/call_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CallPage extends StatefulWidget {
   static final String routeName = '/callpage';
 
-  /// non-modifiable channel name of the page
   final String channelName;
 
-  /// non-modifiable client role of the page
   final ClientRole role;
 
-  /// Creates a call page with given channel name.
-  const CallPage({Key key, this.channelName, this.role}) : super(key: key);
+  final Call call;
+
+  const CallPage({Key key, this.channelName, this.role, this.call})
+      : super(key: key);
 
   @override
   _CallPageState createState() => _CallPageState();
@@ -197,7 +202,13 @@ class _CallPageState extends State<CallPage> {
             padding: const EdgeInsets.all(12.0),
           ),
           RawMaterialButton(
-            onPressed: () => _onCallEnd(context),
+            onPressed: () async {
+              _onCallEnd(context);
+              Get.toNamed(Loading.routeName);
+              await CallRepository()
+                  .endCall(call: widget.call)
+                  .whenComplete(() => Get.offAllNamed(HomePage.routeName));
+            },
             child: Icon(
               Icons.call_end,
               color: Colors.white,
@@ -225,56 +236,6 @@ class _CallPageState extends State<CallPage> {
     );
   }
 
-  // Info panel to show logs
-  // Widget _panel() {
-  //   return Container(
-  //     padding: const EdgeInsets.symmetric(vertical: 48),
-  //     alignment: Alignment.bottomCenter,
-  //     child: FractionallySizedBox(
-  //       heightFactor: 0.5,
-  //       child: Container(
-  //         padding: const EdgeInsets.symmetric(vertical: 48),
-  //         child: ListView.builder(
-  //           reverse: true,
-  //           itemCount: _infoStrings.length,
-  //           itemBuilder: (BuildContext context, int index) {
-  //             if (_infoStrings.isEmpty) {
-  //               return null;
-  //             }
-  //             return Padding(
-  //               padding: const EdgeInsets.symmetric(
-  //                 vertical: 3,
-  //                 horizontal: 10,
-  //               ),
-  //               child: Row(
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 children: [
-  //                   Flexible(
-  //                     child: Container(
-  //                       padding: const EdgeInsets.symmetric(
-  //                         vertical: 2,
-  //                         horizontal: 5,
-  //                       ),
-  //                       decoration: BoxDecoration(
-  //                         color: Colors.yellowAccent,
-  //                         borderRadius: BorderRadius.circular(5),
-  //                       ),
-  //                       child: Text(
-  //                         _infoStrings[index],
-  //                         style: TextStyle(color: Colors.blueGrey),
-  //                       ),
-  //                     ),
-  //                   )
-  //                 ],
-  //               ),
-  //             );
-  //           },
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
   void _onCallEnd(BuildContext context) {
     Navigator.pop(context);
   }
@@ -299,7 +260,6 @@ class _CallPageState extends State<CallPage> {
               child: Stack(
                 children: <Widget>[
                   _viewRows(),
-                  // _panel(),
                   _toolbar(),
                 ],
               ),

@@ -26,6 +26,7 @@ class UserCard extends StatelessWidget {
         child: Row(
           children: [
             avatar,
+            SizedBox(width: 8.0,),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -35,7 +36,7 @@ class UserCard extends StatelessWidget {
                     Text(
                       title,
                       style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                     ),
                     SizedBox(
                       height: 6,
@@ -46,7 +47,7 @@ class UserCard extends StatelessWidget {
               ),
             ),
             Opacity(
-              child: Text('3m ago'),
+              child: Text('1m ago'),
               opacity: 0.64,
             ),
           ],

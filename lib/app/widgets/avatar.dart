@@ -38,11 +38,11 @@ class Avatar extends StatelessWidget {
 
   Widget buildCircleAvatar() {
     return CircleAvatar(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey.withOpacity(0.2),
       radius: radius,
       backgroundImage: imageURL != null ? NetworkImage(imageURL) : null,
       child: imageURL == null
-          ? Icon(Icons.person, color: Colors.blueGrey, size: radius * 1.5,)
+          ? Icon(Icons.person, color: Colors.white, size: radius * 1.5,)
           : null,
     );
   }

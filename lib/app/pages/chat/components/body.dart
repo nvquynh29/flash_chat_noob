@@ -26,6 +26,7 @@ class Body extends StatelessWidget {
           sender: sender,
           receiver: receiver,
         ),
+        
       ],
     );
   }
@@ -67,8 +68,8 @@ class Body extends StatelessWidget {
   }
 
   Widget chatMessageItem(DocumentSnapshot snapshot) {
-    return Container(
-      padding: EdgeInsets.all(1.0),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 6.0),
       child: Container(
         alignment: snapshot['senderId'] == sender.id
             ? Alignment.centerRight
@@ -84,10 +85,10 @@ class Body extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 5),
       constraints:
-          BoxConstraints(maxWidth: media.width * 0.7),
+          BoxConstraints(maxWidth: media.width * 0.65),
       decoration: snapshot['type'] == 'text'
           ? BoxDecoration(
-              color: primary,
+              color: primary.withOpacity(0.7),
               borderRadius: BorderRadius.circular(30),
             )
           : BoxDecoration(),
@@ -102,7 +103,7 @@ class Body extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 5),
       constraints:
-          BoxConstraints(maxWidth: media.width * 0.8),
+          BoxConstraints(maxWidth: media.width * 0.7),
       decoration: snapshot['type'] == 'text'
           ? BoxDecoration(
               color: grey,

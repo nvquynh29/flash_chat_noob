@@ -30,7 +30,7 @@ extension on User {
         id: uid,
         email: email,
         password: null,
-        name: displayName ?? 'Nguyen Van Quynh',
+        name: displayName ?? 'Nguyen Van An',
         photoUrl: photoURL);
   }
 }

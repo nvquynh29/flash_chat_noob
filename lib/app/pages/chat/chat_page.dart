@@ -1,9 +1,11 @@
 
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flash/app/models/user_model.dart';
+import 'package:flash/app/pages/call/pick_up.dart';
 import 'package:flash/app/pages/chat/components/body.dart';
 import 'package:flash/app/utils/call_utils.dart';
 import 'package:flash/app/utils/media.dart';
+import 'package:flash/app/widgets/avatar.dart';
 import 'package:flash/repositories/call_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,22 +39,32 @@ class _ChatPageState extends State<ChatPage>
   Widget build(BuildContext context) {
     media = Media(context);
     r = media.ratio;
-    return Scaffold(
-      appBar: buildAppBar(),
-      body: Body(sender: widget.sender, receiver: widget.receiver),
+
+    return PickupLayout(
+      scaffold: Scaffold(
+        appBar: buildAppBar(),
+        body: Body(sender: widget.sender, receiver: widget.receiver),
+      ),
     );
   }
 
   Widget buildAppBar() {
     return AppBar(
+      backgroundColor: Colors.blue,
+      centerTitle: false,
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Avatar(),
+          Avatar(
+            imageURL: widget.receiver.photoUrl,
+            radius: r * 20,
+          ),
+          SizedBox(width: r * 4),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: media.width * 0.4,
+                width: media.width * 0.35,
                 child: Text(
                   widget.receiver.name,
                   style: TextStyle(fontSize: 16),
@@ -60,8 +72,8 @@ class _ChatPageState extends State<ChatPage>
                 ),
               ),
               Text(
-                'Active 3m ago',
-                style: TextStyle(fontSize: 12),
+                'Active now',
+                style: TextStyle(fontSize: r * 12),
               ),
             ],
           ),
@@ -88,7 +100,7 @@ class _ChatPageState extends State<ChatPage>
           },
           icon: Icon(Icons.videocam),
         ),
-        SizedBox(width: 10),
+        SizedBox(width: r * 5),
       ],
     );
   }

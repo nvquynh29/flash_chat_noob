@@ -1,14 +1,11 @@
-import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/pages/call/pick_up.dart';
 import 'package:flash/app/pages/home/components/home_body.dart';
-import 'package:flash/app/pages/login/login_page.dart';
 import 'package:flash/app/pages/profile/profile.dart';
+import 'package:flash/app/utils/media.dart';
 import 'package:flash/app/widgets/avatar.dart';
-import 'package:flash/app/widgets/user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flash/app/utils/media.dart';
 
 class HomePage extends StatefulWidget {
   static final routeName = '/home';
@@ -47,15 +44,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             ),
           ),
           title: Text('Chats'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Get.find<AuthController>().signOut();
-                Get.offAllNamed(LoginPage.routeName);
-              },
-              icon: Icon(Icons.logout),
-            ),
-          ],
         ),
         body: HomeBody(),
         bottomNavigationBar: BottomNavigationBar(

@@ -2,8 +2,6 @@ import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flash/app/controllers/channel_controller.dart';
 import 'package:flash/app/models/call.dart';
 import 'package:flash/app/pages/call/call_page.dart';
-import 'package:flash/app/pages/call/video_call.dart';
-import 'package:flash/app/widgets/cached_image.dart';
 import 'package:flash/repositories/call_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

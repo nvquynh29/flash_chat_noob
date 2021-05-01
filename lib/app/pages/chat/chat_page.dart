@@ -43,7 +43,7 @@ class _ChatPageState extends State<ChatPage>
     return PickupLayout(
       scaffold: Scaffold(
         appBar: buildAppBar(),
-        body: Body(sender: widget.sender, receiver: widget.receiver),
+        body: ChatBody(sender: widget.sender, receiver: widget.receiver),
       ),
     );
   }
@@ -64,7 +64,7 @@ class _ChatPageState extends State<ChatPage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: media.width * 0.35,
+              width: media.width * 0.35,
                 child: Text(
                   widget.receiver.name,
                   style: TextStyle(fontSize: 16),

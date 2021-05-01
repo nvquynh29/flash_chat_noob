@@ -27,10 +27,11 @@ class UserController extends GetxController {
 extension on User {
   UserModel get toUser {
     return UserModel(
-        id: uid,
-        email: email,
-        password: null,
-        name: displayName ?? 'Nguyen Van An',
-        photoUrl: photoURL);
+      id: uid,
+      email: email,
+      password: null,
+      name: displayName ?? 'Nguyen Van Quynh',
+      photoUrl: photoURL,
+    );
   }
 }

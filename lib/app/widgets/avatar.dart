@@ -26,7 +26,7 @@ class Avatar extends StatelessWidget {
         ? Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: blue_story, width: r),
+              border: Border.all(color: blue_story, width: r * 2),
             ),
             child: Padding(
               padding: const EdgeInsets.all(2),

@@ -4,6 +4,7 @@ import 'package:flash/app/models/user_model.dart';
 import 'package:flash/app/pages/home/home_page.dart';
 import 'package:flash/repositories/user_repository.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
   final _userController = Get.find<UserController>();
@@ -56,10 +57,24 @@ class AuthController extends GetxController {
       Get.toNamed(HomePage.routeName);
     } catch (e) {
       Get.snackbar(
-        "Error signing in",
+        "Error signing in, please check your account information",
         e.message,
         snackPosition: SnackPosition.BOTTOM,
       );
+    }
+  }
+
+  Future<void> logInWithGoogle() async {
+    try {
+      final googleUser = await GoogleSignIn().signIn();
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await _auth.signInWithCredential(credential);
+    } catch (e) {
+      print(e);
     }
   }
 

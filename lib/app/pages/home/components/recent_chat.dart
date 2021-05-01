@@ -5,17 +5,16 @@ import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/models/contact.dart';
 import 'package:flash/app/pages/chat/chat_page.dart';
 import 'package:flash/app/pages/search/search_page.dart';
+import 'package:flash/app/utils/media.dart';
 import 'package:flash/app/widgets/avatar.dart';
 import 'package:flash/app/widgets/user_card.dart';
 import 'package:flash/repositories/contact_repository.dart';
-import 'package:flash/repositories/message_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flash/app/utils/media.dart';
 
 import 'last_message_container.dart';
 
-class HomeBody extends StatelessWidget {
+class RecentChat extends StatelessWidget {
   final _contactRepo = ContactRepository();
   Media media;
   double ratio;
@@ -88,6 +87,10 @@ class HomeBody extends StatelessWidget {
                     subtitle: LastMessageContainer(
                       stream: _contactRepo.fetchLastMessage(
                           senderId: currentUser.id, receiverId: contact.uid),
+                    ),
+                    trailing: Opacity(
+                      child: Text('1m ago'),
+                      opacity: 0.64,
                     ),
                     onTap: () {
                       Map<String, dynamic> arguments = {

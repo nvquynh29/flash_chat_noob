@@ -1,65 +1,82 @@
-import 'package:flash/app/models/call.dart';
-import 'package:flash/app/pages/call/widgets/circle_icon_button.dart';
-import 'package:flash/repositories/call_repository.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flash/app/pages/call/widgets/dial_button.dart';
+import 'package:flash/app/pages/call/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class VideoCall extends StatelessWidget {
-  static final routeName = '/videoCall';
-  Call call;
+class VideoCall extends StatefulWidget {
+  @override
+  _VideoCallState createState() => _VideoCallState();
+}
 
-  VideoCall() {
-    call = Get.arguments;
-  }
-
+class _VideoCallState extends State<VideoCall> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(children: [
-        SizedBox(
-          height: 20,
-        ),
-        Expanded(
-          child: Column(children: [
-            Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  margin: const EdgeInsets.only(right: 20),
-                  width: 100,
-                  height: 153,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColorDark,
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+      backgroundColor: Color(0xFF091C40),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Text(
+                "Anna williams",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4
+                    .copyWith(color: Colors.white),
+              ),
+              Text(
+                "Calling…",
+                style: TextStyle(color: Colors.white60),
+              ),
+              SizedBox(height: 5,),
+              // Avatar()
+              Spacer(),
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                children: [
+                  DialButton(
+                    iconSrc: "assets/icons/Icon Mic.svg",
+                    text: "Audio",
+                    press: () {},
                   ),
-                )),
-            const SizedBox(height: 20),
-          ]),
-        ),
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          CircleIconButton.border(
-            icon: CupertinoIcons.mic_solid,
-            onPressed: () => null,
+                  DialButton(
+                    iconSrc: "assets/icons/Icon Volume.svg",
+                    text: "Microphone",
+                    press: () {},
+                  ),
+                  DialButton(
+                    iconSrc: "assets/icons/Icon Video.svg",
+                    text: "Video",
+                    press: () {},
+                  ),
+                  DialButton(
+                    iconSrc: "assets/icons/Icon Message.svg",
+                    text: "Message",
+                    press: () {},
+                  ),
+                  DialButton(
+                    iconSrc: "assets/icons/Icon User.svg",
+                    text: "Add contact",
+                    press: () {},
+                  ),
+                  DialButton(
+                    iconSrc: "assets/icons/Icon Voicemail.svg",
+                    text: "Voice mail",
+                    press: () {},
+                  ),
+                ],
+              ),
+              SizedBox(height: 10,),
+              RoundedButton(
+                iconSrc: "assets/icons/call_end.svg",
+                press: () {},
+                color: Colors.red,
+                iconColor: Colors.white,
+              )
+            ],
           ),
-          const SizedBox(width: 24),
-          CircleIconButton.border(
-            iconSize: 42,
-            icon: CupertinoIcons.video_camera_solid,
-            onPressed: () => null,
-          ),
-        ]),
-        CircleIconButton(
-          icon: CupertinoIcons.phone_down,
-          color: Colors.red,
-          onPressed: () async {
-            await CallRepository().endCall(call: call);
-            Get.back();
-          },
         ),
-        const SizedBox(height: 20),
-        SizedBox(height: 50 + MediaQuery.of(context).padding.bottom),
-      ]),
+      ),
     );
   }
 }

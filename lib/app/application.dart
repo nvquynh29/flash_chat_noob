@@ -19,6 +19,10 @@ class _MyAppState extends State<MyApp> {
       create: (_) => ImageUploadProvider(),
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: "SF UI",
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
         initialBinding: BindingsBuilder(() {
           Get.put(UserController());
           Get.put(AuthController());

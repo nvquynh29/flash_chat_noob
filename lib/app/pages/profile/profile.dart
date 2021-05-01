@@ -2,6 +2,7 @@ import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/models/user_model.dart';
 import 'package:flash/app/pages/login/login_page.dart';
+import 'package:flash/app/providers/image_upload_provider.dart';
 import 'package:flash/app/widgets/avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flash/app/utils/media.dart';
@@ -9,6 +10,7 @@ import 'package:get/get.dart';
 
 class Profile extends StatelessWidget {
   final UserModel _currentUser = Get.find<UserController>().user;
+  final _imageUploadProvider = ImageUploadProvider();
   static final routeName = '/profile';
   Media media;
   double r;
@@ -39,7 +41,7 @@ class Profile extends StatelessWidget {
               SizedBox(
                 height: r * 20,
               ),
-              ElevatedButton(onPressed: () {}, child: Text('Change Avatar')),
+              TextButton(onPressed: () {}, child: Text('Change Avatar')),
               SizedBox(
                 height: r * 30,
               ),

@@ -46,10 +46,7 @@ class UserCard extends StatelessWidget {
                 ),
               ),
             ),
-            Opacity(
-              child: Text('1m ago'),
-              opacity: 0.64,
-            ),
+            trailing,
           ],
         ),
       ),

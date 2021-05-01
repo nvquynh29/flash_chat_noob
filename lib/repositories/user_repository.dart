@@ -4,7 +4,7 @@ import 'package:flash/app/models/user_model.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class UserRepository extends GetxController {
-final _firestore = FirebaseFirestore.instance;
+  final _firestore = FirebaseFirestore.instance;
   final userCollection = 'users';
 
   Future<bool> createNewUser(UserModel user) async {
@@ -50,13 +50,17 @@ final _firestore = FirebaseFirestore.instance;
     return _users;
   }
 }
+
 extension on User {
   UserModel get toUser {
     return UserModel(
-        id: uid,
-        email: email,
-        password: null,
-        name: displayName,
-        photoUrl: photoURL);
+      id: uid,
+      email: email,
+      password: null,
+      name: displayName,
+      photoUrl: photoURL,
+      status: 'online',
+      hasStories: false,
+    );
   }
 }

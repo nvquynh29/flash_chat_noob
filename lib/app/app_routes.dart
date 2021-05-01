@@ -1,6 +1,4 @@
 import 'package:flash/app/pages/call/call_page.dart';
-import 'package:flash/app/pages/call/video_call.dart';
-import 'package:flash/app/pages/call/voice_call.dart';
 import 'package:flash/app/pages/chat/chat_page.dart';
 import 'package:flash/app/pages/home/home_page.dart';
 import 'package:flash/app/pages/loading.dart';
@@ -19,8 +17,8 @@ final List<GetPage<dynamic>> routes = [
   GetPage(name: SignUpPage.routeName, page: () => SignUpPage()),
   GetPage(name: SearchPage.routeName, page: () => SearchPage()),
   GetPage(name: ChatPage.routeName, page: () => ChatPage()),
-  GetPage(name: VoiceCall.routeName, page: () => VoiceCall()),
-  GetPage(name: VideoCall.routeName, page: () => VideoCall()),
+  // GetPage(name: VoiceCall.routeName, page: () => VoiceCall()),
+  // GetPage(name: VideoCall.routeName, page: () => VideoCall()),
   GetPage(name: Loading.routeName, page: () => Loading()),
   GetPage(name: CallPage.routeName, page: () => CallPage()),
   GetPage(name: Profile.routeName, page: () => Profile())

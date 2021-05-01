@@ -1,14 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flash/app/models/user_model.dart';
+import 'package:flutter/material.dart';
 
-extension on User {
-  UserModel get toUser {
-    return UserModel(
-        id: uid,
-        email: email,
-        password: null,
-        name: displayName,
-        photoUrl: photoURL);
+extension TextEditingExtension on TextEditingController {
+  bool get isValid {
+    if (this.text != null) {
+      return this.text.trim().isNotEmpty;
+    }
+    return false;
   }
 }

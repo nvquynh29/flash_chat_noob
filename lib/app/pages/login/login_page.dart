@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/pages/home/home_page.dart';
+import 'package:flash/app/pages/loading.dart';
 import 'package:flash/app/pages/sign_up/sign_up_page.dart';
 import 'package:flash/app/utils/media.dart';
 import 'package:flash/repositories/user_repository.dart';
@@ -47,7 +48,9 @@ class LoginPage extends GetWidget<AuthController> {
                   height: r * 10,
                 ),
                 _GoogleLoginButton(controller: controller, r: r),
-                SizedBox(height: r * 25,),
+                SizedBox(
+                  height: r * 25,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -188,13 +191,17 @@ class _GoogleLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () {
-        controller.logInWithGoogle().whenComplete(() {
+      onPressed: () async {
+        controller.logInWithGoogle().whenComplete(() async {
           if (FirebaseAuth.instance.currentUser != null) {
-            Get.offAllNamed(HomePage.routeName);
-            UserRepository().createUserFromGoogle(
-              FirebaseAuth.instance.currentUser,
-            );
+            Get.toNamed(Loading.routeName);
+            await UserRepository()
+                .createUserFromGoogle(
+                  FirebaseAuth.instance.currentUser,
+                )
+                .whenComplete(
+                  () => Get.offAllNamed(HomePage.routeName),
+                );
           }
         });
       },
@@ -210,7 +217,7 @@ class _GoogleLoginButton extends StatelessWidget {
           'SIGN IN WITH GOOGLE',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: r * 15,
           ),
         ),
       ),

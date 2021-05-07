@@ -61,7 +61,7 @@ class SignUpPage extends GetWidget<AuthController> {
                       ),
                     ),
                     onPressed: () async {
-                      nameController.isValid;
+                      // nameController.isValid;
                       // Check valid
                       Get.toNamed(Loading.routeName);
                       controller

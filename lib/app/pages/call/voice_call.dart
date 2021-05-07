@@ -2,6 +2,12 @@ import 'package:flash/app/pages/call/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 class VoiceCall extends StatelessWidget {
+  final VoidCallback micControl;
+  final VoidCallback endCall;
+  final VoidCallback volumeControl;
+
+  VoiceCall({this.micControl, this.endCall, this.volumeControl});
+
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
@@ -30,27 +36,27 @@ class VoiceCall extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "Incoming 00:01".toUpperCase(),
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.6),
-                  ),
+                  "Incoming 00:01",
+                  style: Theme.of(context).textTheme.headline5.copyWith(
+                        color: Colors.white.withOpacity(0.7),
+                      ),
                 ),
                 Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     RoundedButton(
-                      press: () {},
+                      press: micControl ?? () {},
                       iconSrc: "assets/icons/Icon Mic.svg",
                     ),
                     RoundedButton(
-                      press: () {},
+                      press: endCall ?? () {},
                       color: Colors.red,
                       iconColor: Colors.white,
                       iconSrc: "assets/icons/call_end.svg",
                     ),
                     RoundedButton(
-                      press: () {},
+                      press: volumeControl ?? () {},
                       iconSrc: "assets/icons/Icon Volume.svg",
                     ),
                   ],

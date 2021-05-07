@@ -48,11 +48,12 @@ class _SearchPageState extends State<SearchPage> {
               hasStories: false,
               online: true,
               imageURL:
-                  'https://images.unsplash.com/photo-1571741140674-8949ca7df2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+                  'https://images.unsplash.com/photo-157174114q0674-8949ca7df2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
             ),
-            title: _receiver.name,
+            title: _receiver.name ?? Container(),
             subtitle: Container(),
             isBoldText: true,
+            trailing: Container(),
             onTap: () {
               Map<String, dynamic> arguments = {
                 'sender': Get.find<UserController>().user,

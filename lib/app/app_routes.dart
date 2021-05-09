@@ -5,11 +5,11 @@ import 'package:flash/app/pages/chat/chat_page.dart';
 import 'package:flash/app/pages/home/home_page.dart';
 import 'package:flash/app/pages/loading.dart';
 import 'package:flash/app/pages/login/login_page.dart';
+import 'package:flash/app/pages/meeting/meeting.dart';
 import 'package:flash/app/pages/profile/profile.dart';
 import 'package:flash/app/pages/root.dart';
 import 'package:flash/app/pages/search/search_page.dart';
 import 'package:flash/app/pages/sign_up/sign_up_page.dart';
-import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
 final List<GetPage<dynamic>> routes = [
@@ -26,4 +26,5 @@ final List<GetPage<dynamic>> routes = [
   GetPage(name: Profile.routeName, page: () => Profile()),
   GetPage(name: CallEnded.routeName, page: () => CallEnded()),
   GetPage(name: Success.routeName, page: () => Success()),
+  GetPage(name: Meeting.routeName, page: () => Meeting()),
 ];

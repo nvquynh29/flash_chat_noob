@@ -167,13 +167,13 @@ class _ChatBodyState extends State<ChatBody> {
             IconButton(
               onPressed: () => pickImage(source: ImageSource.camera),
               icon: Icon(Icons.camera_alt),
-              color: Colors.blue,
+              color: primary,
               iconSize: r * 27,
             ),
             IconButton(
               onPressed: () => pickImage(source: ImageSource.gallery),
               icon: Icon(Icons.image),
-              color: Colors.blue,
+              color: primary,
               iconSize: r * 27,
             ),
             Expanded(
@@ -200,7 +200,7 @@ class _ChatBodyState extends State<ChatBody> {
                         }
                       },
                       icon: Icon(Icons.sentiment_satisfied_alt_outlined),
-                      color: Colors.black,
+                      color: primary,
                       iconSize: r * 27,
                     ),
                     SizedBox(
@@ -222,7 +222,7 @@ class _ChatBodyState extends State<ChatBody> {
                     IconButton(
                       onPressed: _sendMessage,
                       icon: Icon(Icons.send),
-                      color: Colors.blueAccent,
+                      color: primary,
                       iconSize: r * 27,
                     ),
                   ],

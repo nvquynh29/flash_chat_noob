@@ -1,3 +1,4 @@
+import 'package:flash/app/constants/colors.dart';
 import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/pages/call/pick_up.dart';
 import 'package:flash/app/pages/home/components/recent_chat.dart';
@@ -35,13 +36,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     return PickupLayout(
       scaffold: Scaffold(
         appBar: AppBar(
-          // backgroundColor: Colors.white,
           leading: _selectedIndex == 0 ? Padding(
-          padding: const EdgeInsets.all(6.0),
+          padding: EdgeInsets.symmetric(vertical: r * 10, horizontal: r * 6),
             child: InkWell(
               child: Avatar(
                 imageURL: Get.find<UserController>().user.photoUrl,
-                radius: r * 22,
+                radius: r * 24,
               ),
               onTap: () => Get.toNamed(Profile.routeName),
             ),
@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         ),
         body: _pages.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: primary,
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.messenger), label: 'Chats'),

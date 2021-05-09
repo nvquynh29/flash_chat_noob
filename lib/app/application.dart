@@ -1,4 +1,5 @@
 import 'package:flash/app/app_routes.dart';
+import 'package:flash/app/constants/colors.dart';
 import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/providers/image_upload_provider.dart';
@@ -20,6 +21,13 @@ class _MyAppState extends State<MyApp> {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          primaryColor: primary,
+          primaryTextTheme: TextTheme(
+            title: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          primaryIconTheme: IconThemeData(color: Colors.white),
           fontFamily: "SF UI",
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),

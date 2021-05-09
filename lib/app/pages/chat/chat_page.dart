@@ -49,7 +49,6 @@ class _ChatPageState extends State<ChatPage>
 
   Widget buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.blue,
       centerTitle: false,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,

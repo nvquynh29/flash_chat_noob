@@ -1,8 +1,8 @@
 import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/models/call.dart';
-import 'package:flash/app/pages/call/widgets/rounded_button.dart';
 import 'package:flash/app/utils/call_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class VoiceCall extends StatelessWidget {
@@ -43,13 +43,22 @@ class VoiceCall extends StatelessWidget {
                         .copyWith(color: Colors.white),
                   ),
                 ),
-                // SizedBox(height: 10),
-                // Text(
-                //   "Incoming 00:01",
-                //   style: Theme.of(context).textTheme.headline5.copyWith(
-                //         color: Colors.white.withOpacity(0.7),
-                //       ),
-                // ),
+                SizedBox(height: 10),
+                Center(
+                  child: Text(
+                    "Calling...",
+                    style: Theme.of(context).textTheme.headline5.copyWith(
+                          color: Colors.white.withOpacity(0.7),
+                        ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Center(
+                  child: SpinKitThreeBounce(
+                    color: Colors.white,
+                    duration: Duration(milliseconds: 2100),
+                  ),
+                ),
                 Spacer(),
                 toolbar,
               ],

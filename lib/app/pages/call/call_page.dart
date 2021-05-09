@@ -8,6 +8,7 @@ import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/models/call.dart';
 import 'package:flash/app/pages/call/call_ended.dart';
 import 'package:flash/app/pages/call/dial_screen.dart';
+import 'package:flash/app/pages/call/video_call.dart';
 import 'package:flash/app/pages/call/voice_call.dart';
 import 'package:flash/app/pages/home/home_page.dart';
 import 'package:flash/app/pages/loading.dart';
@@ -194,7 +195,8 @@ class _CallPageState extends State<CallPage> {
           RawMaterialButton(
             onPressed: () async {
               _onCallEnd(context);
-              Get.toNamed(Loading.routeName);
+              _users.clear();
+              Get.offAllNamed(Loading.routeName);
               await CallRepository()
                   .endCall(call: widget.call)
                   .whenComplete(() => Get.offAllNamed(HomePage.routeName));
@@ -246,15 +248,42 @@ class _CallPageState extends State<CallPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: widget.role != ClientRole.Audience
-          ? Center(
-              child: Stack(
-                children: <Widget>[
-                  _viewRows(),
-                  _toolbar(),
-                ],
-              ),
-            )
+          ? videoRouting()
           : voiceRouting(),
+    );
+  }
+
+  Widget videoRouting() {
+    final views = _getRenderViews();
+    switch (views.length) {
+      case 0:
+        if (joined.value) {
+          return CallEnded();
+        } else {
+          // return VideoCall(
+          //     call: widget.call, viewRows: _viewRows(), toolbar: _toolbar());
+          if (CallUtils.hasDial(
+              call: widget.call, uid: Get.find<AuthController>().user.uid)) {
+            return DialScreen(call: widget.call);
+          } else {
+            return VideoCall(
+                call: widget.call, viewRows: _viewRows(), toolbar: _toolbar());
+          }
+        }
+        break;
+      case 1:
+      case 2:
+        joined.value = true;
+        return VideoCall(
+            call: widget.call, viewRows: _viewRows(), toolbar: _toolbar());
+      default:
+        joined.value = false;
+        break;
+    }
+    return Scaffold(
+      body: Center(
+        child: Text('Calling error'),
+      ),
     );
   }
 

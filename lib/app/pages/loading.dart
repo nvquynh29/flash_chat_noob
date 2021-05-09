@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatelessWidget {
-  static final routeName = '/loading';
+  static final String routeName = '/loading';
   @override
   Widget build(BuildContext context) {
+    var spinkit = SpinKitPouringHourglass(
+      color: Colors.green,
+      duration: Duration(seconds: 2),
+    );
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(),
-            SizedBox(height: 10,),
-            Text('Please wait...', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),),
-            SizedBox(height: 10,),
-            Text('It might take a while', style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.w400),),
+            spinkit,
+            SizedBox(height: 50),
+            Text(
+              'Loading...',
+              style: TextStyle(
+                color: Colors.green,
+                fontSize: 20,
+              ),
+            ),
           ],
         ),
       ),

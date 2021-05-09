@@ -112,7 +112,7 @@ class CallEnded extends StatelessWidget {
                 ratio: r,
                 label: 'Submit',
                 press: () {
-                  Get.toNamed(Success.routeName);
+                  Get.offAllNamed(Success.routeName);
                 },
                 bgColor: primary,
               ),

@@ -4,6 +4,7 @@ import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/models/contact.dart';
 import 'package:flash/app/pages/chat/chat_page.dart';
+import 'package:flash/app/pages/home/components/favorite_contacts.dart';
 import 'package:flash/app/pages/search/search_page.dart';
 import 'package:flash/app/utils/media.dart';
 import 'package:flash/app/widgets/avatar.dart';
@@ -22,6 +23,7 @@ class RecentChat extends StatelessWidget {
   Widget build(BuildContext context) {
     media = Media(context);
     ratio = media.ratio;
+
     return Column(children: [
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -43,6 +45,7 @@ class RecentChat extends StatelessWidget {
           ),
         ),
       ),
+      FavoriteContacts(),
       StreamBuilder<QuerySnapshot>(
         stream: _contactRepo.fetchContacts(
             userId: Get.find<AuthController>().user.uid),

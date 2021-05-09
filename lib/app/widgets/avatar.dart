@@ -29,7 +29,7 @@ class Avatar extends StatelessWidget {
               border: Border.all(color: blue_story, width: r * 2),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(2),
+              padding: EdgeInsets.all(r * 2),
               child: buildStatusAvatar(),
             ),
           )

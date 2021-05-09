@@ -1,12 +1,15 @@
+import 'package:flash/app/controllers/auth_controller.dart';
+import 'package:flash/app/models/call.dart';
 import 'package:flash/app/pages/call/widgets/rounded_button.dart';
+import 'package:flash/app/utils/call_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class VoiceCall extends StatelessWidget {
-  final VoidCallback micControl;
-  final VoidCallback endCall;
-  final VoidCallback volumeControl;
+  final Call call;
+  final Widget toolbar;
 
-  VoiceCall({this.micControl, this.endCall, this.volumeControl});
+  VoiceCall({@required this.call, @required this.toolbar});
 
   Widget build(BuildContext context) {
     return Stack(
@@ -27,40 +30,28 @@ class VoiceCall extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Jemmy \nWilliams",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline3
-                      .copyWith(color: Colors.white),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "Incoming 00:01",
-                  style: Theme.of(context).textTheme.headline5.copyWith(
-                        color: Colors.white.withOpacity(0.7),
-                      ),
-                ),
                 Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    RoundedButton(
-                      press: micControl ?? () {},
-                      iconSrc: "assets/icons/Icon Mic.svg",
+                Center(
+                  child: Text(
+                    CallUtils.getOtherSideName(
+                      call: call,
+                      myId: Get.find<AuthController>().user.uid,
                     ),
-                    RoundedButton(
-                      press: endCall ?? () {},
-                      color: Colors.red,
-                      iconColor: Colors.white,
-                      iconSrc: "assets/icons/call_end.svg",
-                    ),
-                    RoundedButton(
-                      press: volumeControl ?? () {},
-                      iconSrc: "assets/icons/Icon Volume.svg",
-                    ),
-                  ],
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3
+                        .copyWith(color: Colors.white),
+                  ),
                 ),
+                // SizedBox(height: 10),
+                // Text(
+                //   "Incoming 00:01",
+                //   style: Theme.of(context).textTheme.headline5.copyWith(
+                //         color: Colors.white.withOpacity(0.7),
+                //       ),
+                // ),
+                Spacer(),
+                toolbar,
               ],
             ),
           ),

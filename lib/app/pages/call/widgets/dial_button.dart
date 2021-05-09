@@ -1,3 +1,4 @@
+import 'package:flash/app/utils/media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,13 +15,15 @@ class DialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Media media = Media(context);
+    double r = media.ratio;
     return SizedBox(
-      width: 120,
+      width: r * 110,
       child: TextButton(
         style: ButtonStyle(
           padding: MaterialStateProperty.all(
             EdgeInsets.symmetric(
-              vertical: 20,
+              vertical: r * 20,
             ),
           ),
         ),
@@ -30,16 +33,16 @@ class DialButton extends StatelessWidget {
             SvgPicture.asset(
               iconSrc,
               color: Colors.white,
-              height: 36,
+              height: r * 34,
             ),
             SizedBox(
-              height: 5,
+              height: r * 12,
             ),
             Text(
               text,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 13,
+                fontSize: r * 13,
               ),
             )
           ],

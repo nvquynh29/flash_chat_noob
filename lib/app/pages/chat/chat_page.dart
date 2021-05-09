@@ -1,4 +1,3 @@
-
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flash/app/models/user_model.dart';
 import 'package:flash/app/pages/call/pick_up.dart';
@@ -59,12 +58,12 @@ class _ChatPageState extends State<ChatPage>
             imageURL: widget.receiver.photoUrl,
             radius: r * 20,
           ),
-          SizedBox(width: r * 4),
+          SizedBox(width: r * 6),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-              width: media.width * 0.35,
+                width: media.width * 0.35,
                 child: Text(
                   widget.receiver.name,
                   style: TextStyle(fontSize: 16),

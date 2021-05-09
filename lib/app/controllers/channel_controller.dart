@@ -17,4 +17,6 @@ class ChannelController {
     final status = await permission.request();
     print(status);
   }
+
+  
 }

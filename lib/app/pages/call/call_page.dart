@@ -4,9 +4,14 @@ import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:flash/app/constants/agora_settings.dart';
+import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/models/call.dart';
+import 'package:flash/app/pages/call/call_ended.dart';
+import 'package:flash/app/pages/call/dial_screen.dart';
+import 'package:flash/app/pages/call/voice_call.dart';
 import 'package:flash/app/pages/home/home_page.dart';
 import 'package:flash/app/pages/loading.dart';
+import 'package:flash/app/utils/call_utils.dart';
 import 'package:flash/repositories/call_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,6 +33,7 @@ class CallPage extends StatefulWidget {
 }
 
 class _CallPageState extends State<CallPage> {
+  var joined = false.obs;
   final _users = <int>[];
   final _infoStrings = <String>[];
   bool muted = false;
@@ -160,22 +166,6 @@ class _CallPageState extends State<CallPage> {
             _expandedVideoRow([views[1]])
           ],
         ));
-      // case 3:
-      //   return Container(
-      //       child: Column(
-      //     children: <Widget>[
-      //       _expandedVideoRow(views.sublist(0, 2)),
-      //       _expandedVideoRow(views.sublist(2, 3))
-      //     ],
-      //   ));
-      // case 4:
-      //   return Container(
-      //       child: Column(
-      //     children: <Widget>[
-      //       _expandedVideoRow(views.sublist(0, 2)),
-      //       _expandedVideoRow(views.sublist(2, 4))
-      //     ],
-      //   ));
       default:
     }
     return Container();
@@ -185,16 +175,16 @@ class _CallPageState extends State<CallPage> {
   Widget _toolbar() {
     return Container(
       alignment: Alignment.bottomCenter,
-      padding: const EdgeInsets.symmetric(vertical: 48),
+      padding: const EdgeInsets.symmetric(vertical: 40),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           RawMaterialButton(
             onPressed: _onToggleMute,
             child: Icon(
               muted ? Icons.mic_off : Icons.mic,
               color: muted ? Colors.white : Colors.blueAccent,
-              size: 20.0,
+              size: 30,
             ),
             shape: CircleBorder(),
             elevation: 2.0,
@@ -212,7 +202,7 @@ class _CallPageState extends State<CallPage> {
             child: Icon(
               Icons.call_end,
               color: Colors.white,
-              size: 35.0,
+              size: 40.0,
             ),
             shape: CircleBorder(),
             elevation: 2.0,
@@ -224,7 +214,7 @@ class _CallPageState extends State<CallPage> {
             child: Icon(
               Icons.switch_camera,
               color: Colors.blueAccent,
-              size: 20.0,
+              size: 30.0,
             ),
             shape: CircleBorder(),
             elevation: 2.0,
@@ -264,7 +254,32 @@ class _CallPageState extends State<CallPage> {
                 ],
               ),
             )
-          : Center(child: _toolbar()),
+          : voiceRouting(),
     );
+  }
+
+  Widget voiceRouting() {
+    final views = _getRenderViews();
+    switch (views.length) {
+      case 0:
+        if (joined.value) {
+          return CallEnded();
+        } else {
+          if (CallUtils.hasDial(
+              call: widget.call, uid: Get.find<AuthController>().user.uid)) {
+            return DialScreen(call: widget.call);
+          } else {
+            return VoiceCall(call: widget.call, toolbar: _toolbar());
+          }
+        }
+        break;
+      case 1:
+        joined.value = true;
+        return VoiceCall(call: widget.call, toolbar: _toolbar());
+      default:
+        joined.value = false;
+        break;
+    }
+    return Scaffold();
   }
 }

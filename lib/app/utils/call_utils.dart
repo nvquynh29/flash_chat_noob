@@ -33,17 +33,23 @@ class CallUtils {
       Get.to(CallPage(
         channelName: call.channelId,
         role: clientRole,
+        call: call,
       ));
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     // builder: (context) => VideoCallScreen(call: call),
-      //     builder: (_) => CallPage(
-      //       channelName: call.channelId,
-      //       role: clientRole,
-      //     )
-      //   ),
-      // );
     }
+  }
+
+  static String getOtherSideName({Call call, String myId}) {
+    if (call.caller == null || call.receiver == null) {
+      return 'Name String';
+    }
+    if (call.caller.id == myId) {
+      return call.receiver.name;
+    } else {
+      return call.caller.name;
+    }
+  }
+
+  static bool hasDial({Call call, String uid}) {
+    return call.caller.id == uid;
   }
 }

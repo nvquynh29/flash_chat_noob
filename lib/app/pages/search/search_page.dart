@@ -1,4 +1,3 @@
-import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/models/user_model.dart';
 import 'package:flash/app/pages/chat/chat_page.dart';
@@ -47,8 +46,7 @@ class _SearchPageState extends State<SearchPage> {
               radius: 75 / 2,
               hasStories: false,
               online: true,
-              imageURL:
-                  'https://images.unsplash.com/photo-157174114q0674-8949ca7df2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+              imageURL: _receiver.photoUrl,
             ),
             title: _receiver.name ?? Container(),
             subtitle: Container(),

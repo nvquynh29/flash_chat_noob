@@ -77,7 +77,7 @@ class SignUpPage extends GetWidget<AuthController> {
                       'Sign Up',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: r * 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

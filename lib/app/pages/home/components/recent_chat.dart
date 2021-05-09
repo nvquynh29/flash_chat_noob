@@ -71,16 +71,11 @@ class RecentChat extends StatelessWidget {
                 itemCount: contactDocs.length,
                 itemBuilder: (context, index) {
                   final currentUser = Get.find<UserController>().user;
-                  // AuthMethods().updateUserStatus(
-                  //   uid: currentUser.id,
-                  //   status: UserStatus.online,
-                  // );
                   Contact contact = Contact.fromMap(contactDocs[index].data());
                   return UserCard(
                     avatar: Avatar(
                       radius: ratio * 30,
-                      imageURL:
-                          'https://images.unsplash.com/photo-1571741140674-8949ca7df2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+                      imageURL: contact.user.photoUrl,
                       online: true,
                     ),
                     title: contact.user.name,

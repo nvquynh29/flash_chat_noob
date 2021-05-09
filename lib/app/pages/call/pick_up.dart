@@ -5,7 +5,7 @@ import 'package:flash/repositories/call_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'dial_body.dart';
+import 'incoming.dart';
 
 class PickupLayout extends StatefulWidget {
   final Widget scaffold;
@@ -29,7 +29,7 @@ class _PickupLayoutState extends State<PickupLayout> {
               if (snapshot.hasData && snapshot.data.data() != null) {
                 Call call = Call.fromMap(snapshot.data.data());
                 if (!call.hasDial) {
-                  return DialBody(call: call);
+                  return Incoming(call: call);
                 }
                 return widget.scaffold;
               }

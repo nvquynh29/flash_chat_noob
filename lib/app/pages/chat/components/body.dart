@@ -271,7 +271,7 @@ class _ChatBodyState extends State<ChatBody> {
   void pickImage({@required ImageSource source}) async {
     final imageRepo = ImageUploadProvider();
     final selectedImage = await imageRepo.pickImage(source: source);
-    imageRepo.uploadImage(
+    imageRepo.uploadImageMessage(
       image: selectedImage,
       receiverId: widget.receiver.id,
       senderId: widget.sender.id,

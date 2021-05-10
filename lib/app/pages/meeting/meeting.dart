@@ -1,12 +1,9 @@
 import 'dart:io';
 
 import 'package:flash/app/constants/colors.dart';
-import 'package:flash/app/controllers/user_controller.dart';
-import 'package:flash/app/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:jitsi_meet/jitsi_meet.dart';
 import 'package:jitsi_meet/room_name_constraint.dart';
 import 'package:jitsi_meet/room_name_constraint_type.dart';
@@ -19,9 +16,7 @@ class Meeting extends StatefulWidget {
 
 class _MeetingState extends State<Meeting> {
   final roomText = TextEditingController(text: "Flash");
-  final subjectText = TextEditingController();
   final nameText = TextEditingController();
-  final emailText = TextEditingController();
   var isAudioOnly = true;
   var isAudioMuted = true;
   var isVideoMuted = true;
@@ -108,30 +103,10 @@ class _MeetingState extends State<Meeting> {
             height: 14.0,
           ),
           TextField(
-            controller: subjectText,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Subject",
-            ),
-          ),
-          SizedBox(
-            height: 14.0,
-          ),
-          TextField(
             controller: nameText,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: "Display Name",
-            ),
-          ),
-          SizedBox(
-            height: 14.0,
-          ),
-          TextField(
-            controller: emailText,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: "Email",
             ),
           ),
           SizedBox(
@@ -225,10 +200,7 @@ class _MeetingState extends State<Meeting> {
     // Define meetings options here
     var options = JitsiMeetingOptions()
       ..room = roomText.text
-      // ..serverURL = serverUrl
-      ..subject = subjectText.text
       ..userDisplayName = nameText.text
-      ..userEmail = emailText.text
       ..audioOnly = isAudioOnly
       ..audioMuted = isAudioMuted
       ..videoMuted = isVideoMuted

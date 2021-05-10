@@ -12,8 +12,8 @@
    <application
         tools:replace="android:label"
         android:requestLegacyExternalStorage="true"
-        android:label="flash"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Flash"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

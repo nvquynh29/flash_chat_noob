@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flash/app/constants/collections.dart';
 import 'package:flash/app/controllers/auth_controller.dart';
 import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/models/user_model.dart';
@@ -13,6 +15,9 @@ class Profile extends StatelessWidget {
   final UserModel _currentUser = Get.find<UserController>().user;
   final _imageUploadProvider = ImageUploadProvider();
   static final routeName = '/profile';
+  final CollectionReference usersRef =
+      FirebaseFirestore.instance.collection(userCollection);
+
   Media media;
   double r;
   @override
@@ -35,12 +40,25 @@ class Profile extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: media.width * 0.5 - r * 100),
-                    child: Avatar(
-                      radius: r * 100,
-                      imageURL: _currentUser.photoUrl,
+                    child: StreamBuilder<DocumentSnapshot>(
+                      stream: usersRef.doc(_currentUser.id).snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData && snapshot.data.data() != null) {
+                          return Avatar(
+                            radius: r * 100,
+                            imageURL: snapshot.data.data()['photoUrl'],
+                          );
+                        }
+                        return Avatar(
+                          radius: r * 100,
+                          imageURL: _currentUser.photoUrl,
+                        );
+                      },
                     ),
                   ),
-                  SizedBox(height: r * 40,),
+                  SizedBox(
+                    height: r * 40,
+                  ),
                   _nameTile(),
                   _emailTile(),
                   _logoutTile(),
@@ -51,38 +69,6 @@ class Profile extends StatelessWidget {
         ],
       ),
     );
-
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: Text('My Account'),
-    //     backgroundColor: Colors.green,
-    //   ),
-    //   body: SafeArea(
-    //     child: Center(
-    //       child: Column(
-    //         children: [
-    //           SizedBox(
-    //             height: r * 50,
-    //           ),
-    //           Padding(
-    //             padding: EdgeInsets.symmetric(
-    //                 horizontal: media.width * 0.5 - r * 50),
-    //             child: Avatar(
-    //               radius: r * 50,
-    //               imageURL: _currentUser.photoUrl,
-    //             ),
-    //           ),
-    //           SizedBox(
-    //             height: r * 20,
-    //           ),
-    //           _nameTile(),
-    //           _emailTile(),
-    //           _logoutTile(),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 
   Widget _nameTile() {

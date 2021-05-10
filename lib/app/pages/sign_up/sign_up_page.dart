@@ -3,9 +3,9 @@ import 'package:flash/app/pages/home/home_page.dart';
 import 'package:flash/app/pages/loading.dart';
 import 'package:flash/app/pages/login/login_page.dart';
 import 'package:flash/app/utils/media.dart';
+import 'package:flash/app/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flash/app/utils/extensions.dart';
 
 class SignUpPage extends GetWidget<AuthController> {
   final nameController = TextEditingController();
@@ -14,6 +14,10 @@ class SignUpPage extends GetWidget<AuthController> {
   final rePasswordController = TextEditingController();
 
   static final routeName = '/signup';
+
+  bool _isValidEmail;
+  bool _isValidPassword;
+  bool _rePasswordMatch;
   @override
   Widget build(BuildContext context) {
     Media media = Media(context);
@@ -60,19 +64,7 @@ class SignUpPage extends GetWidget<AuthController> {
                         borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
-                    onPressed: () async {
-                      // nameController.isValid;
-                      // Check valid
-                      Get.toNamed(Loading.routeName);
-                      controller
-                          .createUser(
-                            email: emailController.text,
-                            name: nameController.text,
-                            password: passwordController.text,
-                          )
-                          .whenComplete(
-                              () => Get.offAllNamed(HomePage.routeName));
-                    },
+                    onPressed: _handleSignUp,
                     child: Text(
                       'Sign Up',
                       style: TextStyle(
@@ -118,6 +110,48 @@ class SignUpPage extends GetWidget<AuthController> {
       ),
     );
   }
+
+  Future<void> _handleSignUp() async {
+    if (_validation()) {
+      Get.toNamed(Loading.routeName);
+      controller
+          .createUser(
+            email: emailController.text,
+            name: nameController.text,
+            password: passwordController.text,
+          )
+          .whenComplete(() => Get.offAllNamed(HomePage.routeName));
+    }
+  }
+
+  bool _validation() {
+    String email = emailController.text.trim();
+    String password = passwordController.text;
+    String repassword = rePasswordController.text;
+
+    if (!Validators.isValidEmail(email)) {
+      Get.snackbar(
+        'Email Invalid',
+        'Please enter a valid email address',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } else if (!Validators.isValidPassword(password)) {
+      Get.snackbar(
+        'Password too weak',
+        'Password must be at least 8 characters',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } else if (repassword != password) {
+      Get.snackbar(
+        'Password does not match',
+        'Check your confirm password and try again',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } else {
+      return true;
+    }
+    return false;
+  }
 }
 
 class _InputField extends StatelessWidget {
@@ -126,11 +160,12 @@ class _InputField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
 
-  _InputField(
-      {this.controller,
-      this.prefixIcon,
-      this.hintText,
-      this.obscureText = false});
+  _InputField({
+    this.controller,
+    this.prefixIcon,
+    this.hintText,
+    this.obscureText = false,
+  });
 
   @override
   Widget build(BuildContext context) {

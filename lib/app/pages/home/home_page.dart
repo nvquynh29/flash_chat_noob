@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
       scaffold: Scaffold(
         appBar: AppBar(
           leading: _selectedIndex == 0 ? Padding(
-          padding: EdgeInsets.symmetric(vertical: r * 10, horizontal: r * 6),
+          padding: EdgeInsets.all(r * 6),
             child: InkWell(
               child: Avatar(
                 imageURL: Get.find<UserController>().user.photoUrl,

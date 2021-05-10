@@ -38,7 +38,7 @@ class FavoriteContacts extends StatelessWidget {
                 ),
                 SizedBox(height: r * 15),
                 Text(
-                  'Create Room',
+                  'Meeting',
                   style: TextStyle(fontSize: r * 14),
                   overflow: TextOverflow.ellipsis,
                 ),

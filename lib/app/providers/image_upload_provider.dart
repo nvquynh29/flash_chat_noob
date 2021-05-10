@@ -86,7 +86,7 @@ class ImageUploadProvider with ChangeNotifier {
     messageRepository.sendMessage(message: message);
   }
 
-  void uploadImage({
+  void uploadImageMessage({
     File image,
     String receiverId,
     String senderId,
@@ -104,4 +104,6 @@ class ImageUploadProvider with ChangeNotifier {
       setImageMsg(url: url, senderId: senderId, receiverId: receiverId);
     }
   }
+
+  
 }

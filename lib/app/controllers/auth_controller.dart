@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash/app/constants/default_avatars.dart';
 import 'package:flash/app/controllers/user_controller.dart';
 import 'package:flash/app/models/user_model.dart';
 import 'package:flash/app/pages/home/home_page.dart';
@@ -33,6 +34,7 @@ class AuthController extends GetxController {
         name: name,
         status: 'unknown',
         hasStories: false,
+        photoUrl: DefaultAvatar.randomAvatarLink(),
       );
       if (await UserRepository().createNewUser(user)) {
         _userController.user = user;

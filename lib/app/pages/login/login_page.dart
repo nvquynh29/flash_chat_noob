@@ -166,7 +166,7 @@ class _LoginButton extends StatelessWidget {
           'LOGIN',
           style: TextStyle(fontSize: 24, color: Colors.white),
         ),
-        width: r * 200,
+        width: r * 220,
         height: r * 48,
         alignment: Alignment.center,
       ),
@@ -210,7 +210,7 @@ class _GoogleLoginButton extends StatelessWidget {
         size: r * 20,
       ),
       label: Container(
-        width: r * 170,
+        width: r * 200,
         height: r * 48,
         alignment: Alignment.center,
         child: Text(
